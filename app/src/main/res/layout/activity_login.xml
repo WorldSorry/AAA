@@ -72,14 +72,28 @@
                 android:text="@string/action_sign_in"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/register"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:autoLink="all"
-                android:layout_marginTop="10dp"
-                android:text="@string/action_new_account"
-                />
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp"
+                >
+                <TextView
+                    android:id="@+id/register"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:autoLink="all"
+                    android:text="@string/action_new_account"
+                    />
+                <TextView
+                    android:id="@+id/forget_pwd"
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_height="wrap_content"
+                    android:text="@string/action_new_account"
+                    />
+            </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
