@@ -96,6 +96,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 break;
             case R.id.register:
+
                 startActivity(new Intent(LoginActivity.this,Register2Activity.class));
                 break;
         }
