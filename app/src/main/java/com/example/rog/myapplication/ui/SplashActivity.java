@@ -40,6 +40,7 @@ public class SplashActivity extends AppCompatActivity implements ISplashView{
         clearNotification();
         setContentView(R.layout.activity_splash);
         ButterKnife.bind(this);
+        init();
     }
 
     @Override

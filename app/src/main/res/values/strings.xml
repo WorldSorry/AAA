@@ -31,4 +31,6 @@
         completions."
     </string>
     <string name="title_activity_basectivity">Basectivity</string>
+    <string name="action_register">注册</string>
+    <string name="action_new_account"><a>新用户注册</a></string>
 </resources>

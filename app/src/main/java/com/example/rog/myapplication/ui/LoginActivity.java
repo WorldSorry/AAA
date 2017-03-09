@@ -1,45 +1,30 @@
 package com.example.rog.myapplication.ui;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.annotation.TargetApi;
-import android.content.pm.PackageManager;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.app.LoaderManager.LoaderCallbacks;
-
-import android.content.CursorLoader;
-import android.content.Loader;
-import android.database.Cursor;
-import android.net.Uri;
-import android.os.AsyncTask;
-
-import android.os.Build;
+import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.text.TextUtils;
+import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
-import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import com.example.rog.myapplication.R;
 
-import static android.Manifest.permission.READ_CONTACTS;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends AppCompatActivity{
+public class LoginActivity extends AppCompatActivity {
 
     /**
      * Id to identity READ_CONTACTS permission request.
@@ -53,6 +38,20 @@ public class LoginActivity extends AppCompatActivity{
     private static final String[] DUMMY_CREDENTIALS = new String[]{
             "foo@example.com:hello", "bar@example.com:world"
     };
+    @BindView(R.id.login_progress)
+    ProgressBar loginProgress;
+    @BindView(R.id.email)
+    AutoCompleteTextView email;
+    @BindView(R.id.password)
+    EditText password;
+    @BindView(R.id.email_sign_in_button)
+    Button emailSignInButton;
+    @BindView(R.id.register)
+    TextView register;
+    @BindView(R.id.email_login_form)
+    LinearLayout emailLoginForm;
+    @BindView(R.id.login_form)
+    ScrollView loginForm;
 
     // UI references.
     private AutoCompleteTextView mEmailView;
@@ -64,6 +63,7 @@ public class LoginActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        ButterKnife.bind(this);
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
 
@@ -89,5 +89,16 @@ public class LoginActivity extends AppCompatActivity{
         mProgressView = findViewById(R.id.login_progress);
     }
 
+    @OnClick({R.id.email_sign_in_button, R.id.register})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.email_sign_in_button:
+
+                break;
+            case R.id.register:
+                startActivity(new Intent(LoginActivity.this,RegisterActivity.class));
+                break;
+        }
+    }
 }
 
