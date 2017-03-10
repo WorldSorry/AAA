@@ -7,4 +7,5 @@ package com.example.rog.myapplication.ui.view;
 public interface IRegister2View {
     String getPhoneNumber();
     String getVerNum();
+    void startTime(int i);
 }

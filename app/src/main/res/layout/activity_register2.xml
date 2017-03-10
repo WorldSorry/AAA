@@ -106,7 +106,7 @@
             android:layout_marginTop="@dimen/tencent_tls_ui_edittext_margin"
             android:textSize="@dimen/tencent_tls_ui_buttonFontSize"
             android:textColor="@color/tencent_tls_ui_white"
-            android:text="注册"/>
+            android:text="验证"/>
 
 
     </LinearLayout>

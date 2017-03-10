@@ -10,6 +10,7 @@ import android.widget.ImageButton;
 import com.example.rog.myapplication.R;
 import com.example.rog.myapplication.presenter.Register2Persenter;
 import com.example.rog.myapplication.ui.view.IRegister2View;
+import com.example.rog.myapplication.utils.Util;
 import com.tencent.qcloud.tlslibrary.customview.EditTextWithClearButton;
 import com.tencent.qcloud.tlslibrary.customview.EditTextWithListPopupWindow;
 
@@ -53,6 +54,7 @@ public class Register2Activity extends AppCompatActivity implements IRegister2Vi
                 break;
             case R.id.btn_hostRegister:
 
+                persenter.verifyCode();
                 break;
         }
     }
@@ -65,5 +67,10 @@ public class Register2Activity extends AppCompatActivity implements IRegister2Vi
     @Override
     public String getVerNum() {
         return checkCodeHostRegister.getText().toString();
+    }
+
+    @Override
+    public void startTime(int i) {
+        Util.startTimer(btnRequireCheckCodeHostRegister,"获取验证码","重新获取",i,1);
     }
 }
