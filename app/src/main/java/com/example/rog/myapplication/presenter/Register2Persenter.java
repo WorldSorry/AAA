@@ -2,6 +2,7 @@ package com.example.rog.myapplication.presenter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.text.TextUtils;
 import android.widget.Toast;
 
 import com.example.rog.myapplication.ui.RegisterActivity;
@@ -35,12 +36,21 @@ public class Register2Persenter {
     public void sendCode() {
         type=1;
         String phoneNumber = register2View.getPhoneNumber();
-        accountHelper.TLSPwdRegAskCode("86-"+phoneNumber, pwdRegListener);
+        if (Util.validPhoneNumber("86",phoneNumber)){
+            accountHelper.TLSPwdRegAskCode("86-"+phoneNumber, pwdRegListener);
+        }else {
+            ToastUtils.showToast("电话号码有误！");
+            //102*106
+        }
     }
 
     public void verifyCode() {
         type=2;
         String verNum = register2View.getVerNum();
+        if(TextUtils.isEmpty(verNum)){
+            ToastUtils.showToast("验证码不能为空！");
+            return;
+        }
         accountHelper.TLSPwdRegVerifyCode(verNum, pwdRegListener);
     }
 
@@ -63,6 +73,7 @@ public class Register2Persenter {
             Context context=(Context) register2View;
             Intent intent=new Intent(context, RegisterActivity.class);
             context.startActivity(intent);
+            register2View.exitActivity();
         }
 
         @Override

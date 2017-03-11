@@ -21,7 +21,7 @@
     <!-- Strings related to login -->
     <string name="prompt_email">UserName</string>
     <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Login in</string>
+    <string name="action_sign_in">登录</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
@@ -33,4 +33,5 @@
     <string name="title_activity_basectivity">Basectivity</string>
     <string name="action_register">注册</string>
     <string name="action_new_account"><a>新用户注册</a></string>
+    <string name="phone">phone</string>
 </resources>

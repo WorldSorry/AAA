@@ -1,5 +1,6 @@
 package com.example.rog.myapplication.ui;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AutoCompleteTextView;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -16,6 +18,8 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.rog.myapplication.R;
+import com.example.rog.myapplication.presenter.LoginPersenter;
+import com.example.rog.myapplication.ui.view.ILoginVIew;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,7 +28,7 @@ import butterknife.OnClick;
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends BaseActivity implements ILoginVIew {
 
     /**
      * Id to identity READ_CONTACTS permission request.
@@ -53,53 +57,41 @@ public class LoginActivity extends AppCompatActivity {
     @BindView(R.id.login_form)
     ScrollView loginForm;
 
-    // UI references.
-    private AutoCompleteTextView mEmailView;
-    private EditText mPasswordView;
-    private View mProgressView;
-    private View mLoginFormView;
+    private LoginPersenter loginPersenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
-        // Set up the login form.
-        mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
-
-        mPasswordView = (EditText) findViewById(R.id.password);
-        mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
-                if (id == R.id.login || id == EditorInfo.IME_NULL) {
-                    return true;
-                }
-                return false;
-            }
-        });
-
-        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
-        mEmailSignInButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-            }
-        });
-
-        mLoginFormView = findViewById(R.id.login_form);
-        mProgressView = findViewById(R.id.login_progress);
+        loginPersenter = new LoginPersenter(this);
     }
 
     @OnClick({R.id.email_sign_in_button, R.id.register})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.email_sign_in_button:
-
+                loginPersenter.login();
                 break;
             case R.id.register:
-
-                startActivity(new Intent(LoginActivity.this,Register2Activity.class));
+                startActivity(new Intent(LoginActivity.this, Register2Activity.class));
                 break;
         }
+    }
+
+    @Override
+    public String phone() {
+        return email.getText().toString();
+    }
+
+    @Override
+    public String password() {
+        return password.getText().toString();
+    }
+
+    @Override
+    public void exitActivity() {
+        exitActivity();
     }
 }
 

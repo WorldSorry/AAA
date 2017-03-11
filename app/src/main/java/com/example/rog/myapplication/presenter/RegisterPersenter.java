@@ -2,9 +2,11 @@ package com.example.rog.myapplication.presenter;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.text.TextUtils;
 
 import com.example.rog.myapplication.App;
 import com.example.rog.myapplication.ui.view.IRegisterView;
+import com.example.rog.myapplication.utils.ToastUtils;
 import com.tencent.qcloud.tlslibrary.activity.PhonePwdLoginActivity;
 import com.tencent.qcloud.tlslibrary.helper.Util;
 import com.tencent.qcloud.tlslibrary.service.Constants;
@@ -25,7 +27,7 @@ import static com.tencent.qalsdk.service.QalService.context;
 public class RegisterPersenter {
     IRegisterView iRegisterView;
     TLSAccountHelper accountHelper;
-    PwdRegListener2 pwdRegListener=new PwdRegListener2();
+    PwdRegListener pwdRegListener=new PwdRegListener();
 
     public RegisterPersenter(IRegisterView iRegisterView) {
         this.iRegisterView = iRegisterView;
@@ -36,12 +38,20 @@ public class RegisterPersenter {
     public void register() {
         String userName = iRegisterView.getUserName();
         String password=iRegisterView.getPassword();
-        accountHelper.TLSPwdRegAskCode("86-"+userName, pwdRegListener);
+        if(TextUtils.isEmpty(userName)||TextUtils.isEmpty(userName)){
+            ToastUtils.showToast("请输入密码！");
+            return;
+        }
+        if(!userName.equals(password)){
+            ToastUtils.showToast("两次输入的密码不一样！");
+            return;
+        }
+        accountHelper.TLSPwdRegCommit(password, pwdRegListener);
     }
 
 
 
-    public class  PwdRegListener2 implements TLSPwdRegListener{
+    public class  PwdRegListener implements TLSPwdRegListener{
 
         @Override
         public void OnPwdRegAskCodeSuccess(int i, int i1) {
@@ -60,7 +70,9 @@ public class RegisterPersenter {
 
         @Override
         public void OnPwdRegCommitSuccess(TLSUserInfo tlsUserInfo) {
-
+            ToastUtils.showToast("注册完成！");
+            iRegisterView.exitActivity();
+//            ToastUtils.showToast(tlsUserInfo.);
         }
 
         @Override

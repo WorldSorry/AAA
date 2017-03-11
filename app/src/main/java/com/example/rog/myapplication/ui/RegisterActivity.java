@@ -9,6 +9,7 @@ import android.widget.EditText;
 
 import com.example.rog.myapplication.App;
 import com.example.rog.myapplication.R;
+import com.example.rog.myapplication.presenter.RegisterPersenter;
 import com.example.rog.myapplication.ui.view.IRegisterView;
 import com.tencent.qcloud.tlslibrary.service.PhonePwdRegisterService.PwdRegListener;
 
@@ -25,24 +26,18 @@ public class RegisterActivity extends AppCompatActivity implements IRegisterView
     EditText password;
     @BindView(R.id.email_sign_in_button)
     Button emailSignInButton;
+    private RegisterPersenter registerPersenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         ButterKnife.bind(this);
-        init();
+        registerPersenter = new RegisterPersenter(this);
     }
-
-
-
-    private void init() {
-
-    }
-
     @OnClick(R.id.email_sign_in_button)
     public void onClick() {
-
+        registerPersenter.register();
     }
 
     @Override
@@ -53,5 +48,10 @@ public class RegisterActivity extends AppCompatActivity implements IRegisterView
     @Override
     public String getPassword() {
         return password.getText().toString();
+    }
+
+    @Override
+    public void exitActivity() {
+        finish();
     }
 }

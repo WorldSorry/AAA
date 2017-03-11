@@ -73,4 +73,9 @@ public class Register2Activity extends AppCompatActivity implements IRegister2Vi
     public void startTime(int i) {
         Util.startTimer(btnRequireCheckCodeHostRegister,"获取验证码","重新获取",i,1);
     }
+
+    @Override
+    public void exitActivity() {
+        finish();
+    }
 }

@@ -7,4 +7,5 @@ package com.example.rog.myapplication.ui.view;
 public interface IRegisterView {
     String getUserName();
     String getPassword();
+    void exitActivity();
 }
